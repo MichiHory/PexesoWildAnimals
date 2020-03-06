@@ -1,0 +1,27 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    },
+    "cordova-plugin-admobpro": {
+      "ADMOB_APP_ID": "ca-app-pub-3801963890145689~3488169705",
+      "PLAY_SERVICES_VERSION": "16.0.0",
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-extension": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Pexeso Animals",
+  "short_name": "Pexeso Animals",
+  "version": "net.hebasoft.pexesowildanimals",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "author": "HeBaSoft",
+  "icons": [],
+  "start_url": "index.html"
+}

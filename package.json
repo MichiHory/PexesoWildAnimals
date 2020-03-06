@@ -1,0 +1,39 @@
+{
+  "name": "net.hebasoft.pexesowildanimals",
+  "displayName": "Pexeso Animals",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "HeBaSoft",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-android": "^8.1.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-plugin-admobpro": "^2.49.0",
+    "cordova-plugin-extension": "^1.5.4",
+    "cordova-plugin-globalization": "^1.11.0"
+  },
+  "devDependencies": {
+    "cordova-plugin-whitelist": "^1.3.4"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-admobpro": {
+        "ADMOB_APP_ID": "ca-app-pub-3801963890145689~3488169705",
+        "PLAY_SERVICES_VERSION": "16.0.0"
+      },
+      "cordova-plugin-globalization": {}
+    },
+    "platforms": [
+      "android",
+      "browser"
+    ]
+  }
+}

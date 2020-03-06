@@ -1,0 +1,113 @@
+body[data-theme="dark"]{
+    background: #555555;
+}
+
+body[data-theme="dark"] #PgMain > .mainActivity{
+    -webkit-box-shadow: inset 0px 0px 300px 50px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 300px 50px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 300px 50px rgba(0,0,0,0.75);
+}
+
+body[data-theme="dark"] .topPanel{
+    background: #393939;
+}
+
+body[data-theme="dark"] .topPanel .topPanel_text, body[data-theme="dark"] .settingsRow,
+body[data-theme="dark"] #SettingsCategoryGame section header, body[data-theme="dark"] .cardRow,
+body[data-theme="dark"] #BuyCardDialog, body[data-theme="dark"] .endGameResults{
+    color: #DDDDDD;
+}
+
+body[data-theme="dark"] .dialog_container > div{
+    width: 80%;
+    background: #4b4b4b;
+}
+
+body[data-theme="dark"] .dialog_container .dialog_header{
+    background: #393939;
+    color: #DDDDDD;
+}
+
+body[data-theme="dark"] #GameDifficultyDialog .btn_gameEasy, #BuyCardDialog body[data-theme="dark"] .btn_buyCard{
+    background: #009256;
+    border-color: #00713c;
+}
+
+body[data-theme="dark"] #GameDifficultyDialog .btn_gameModerate{
+    background: #dc9b15;
+    border-color: #d88812;
+}
+
+
+body[data-theme="dark"] #GameDifficultyDialog .btn_gameHard, body[data-theme="dark"] #BuyCardDialog .btn_cancel{
+    background: #c1293d;
+    border-color: #a8152a;
+}
+
+body[data-theme="dark"] #GameDifficultyDialog .btn_gameTablet{
+    background: #bb2d5e;
+    border: 3px solid #8c1e4b;
+}
+
+body[data-theme="dark"] .card_back{
+    -webkit-box-shadow: inset 0px 0px 100px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: inset 0px 0px 100px 0px rgba(0,0,0,0.3);
+    box-shadow: inset 0px 0px 100px 0px rgba(0,0,0,0.3);
+}
+
+body[data-theme="dark"] #ConSettingsOptions .option_settings{
+    color: #DDDDDD;
+}
+
+body[data-theme="dark"] #ConSettingsOptions .option_settings.selected{
+    border-color: #DDDDDD;
+}
+
+body[data-theme="dark"] .settingAdText .adDescription{
+    color: #aeaeae;
+}
+
+body[data-theme="dark"] #PgMain .starNum, body[data-theme="dark"] #PgCardDesign .starNum{
+    color: #DDDDDD;
+}
+
+body[data-theme="dark"] #BuyCardDialog .btn_buyCard, body[data-theme="dark"] #BuyCardDialog .btn_cancel{
+    color: #DDDDDD;
+}
+
+body[data-theme="dark"] #ConSettingsOptions {
+    background: rgba(15,15,15,1);
+    background: -moz-linear-gradient(top, rgba(15,15,15,1) 0%, rgba(56,56,56,1) 8%, rgba(66,66,66,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(15,15,15,1)), color-stop(8%, rgba(56,56,56,1)), color-stop(100%, rgba(66,66,66,1)));
+    background: -webkit-linear-gradient(top, rgba(15,15,15,1) 0%, rgba(56,56,56,1) 8%, rgba(66,66,66,1) 100%);
+    background: -o-linear-gradient(top, rgba(15,15,15,1) 0%, rgba(56,56,56,1) 8%, rgba(66,66,66,1) 100%);
+    background: -ms-linear-gradient(top, rgba(15,15,15,1) 0%, rgba(56,56,56,1) 8%, rgba(66,66,66,1) 100%);
+    background: linear-gradient(to bottom, rgba(15,15,15,1) 0%, rgba(56,56,56,1) 8%, rgba(66,66,66,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f0f0f', endColorstr='#424242', GradientType=0 );
+}
+
+body[data-theme="dark"] #PgSettings .option, body[data-theme="dark"] #PgCardDesign .option{
+    background: rgba(59,58,59,1);
+    background: -moz-linear-gradient(left, rgba(59,58,59,1) 0%, rgba(82,82,82,1) 77%, rgba(85,85,85,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(59,58,59,1)), color-stop(77%, rgba(82,82,82,1)), color-stop(100%, rgba(85,85,85,1)));
+    background: -webkit-linear-gradient(left, rgba(59,58,59,1) 0%, rgba(82,82,82,1) 77%, rgba(85,85,85,1) 100%);
+    background: -o-linear-gradient(left, rgba(59,58,59,1) 0%, rgba(82,82,82,1) 77%, rgba(85,85,85,1) 100%);
+    background: -ms-linear-gradient(left, rgba(59,58,59,1) 0%, rgba(82,82,82,1) 77%, rgba(85,85,85,1) 100%);
+    background: linear-gradient(to right, rgba(59,58,59,1) 0%, rgba(82,82,82,1) 77%, rgba(85,85,85,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b3a3b', endColorstr='#555555', GradientType=1 );
+}
+
+body[data-theme="dark"] #PgCardDesign .cardRow:nth-of-type(even) .option, body[data-theme="dark"] #PgSettings .settingsRow:nth-of-type(even) .option{
+    background: rgba(51,51,51,1);
+    background: -moz-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(77,77,77,1) 77%, rgba(85,85,85,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(51,51,51,1)), color-stop(77%, rgba(77,77,77,1)), color-stop(100%, rgba(85,85,85,1)));
+    background: -webkit-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(77,77,77,1) 77%, rgba(85,85,85,1) 100%);
+    background: -o-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(77,77,77,1) 77%, rgba(85,85,85,1) 100%);
+    background: -ms-linear-gradient(left, rgba(51,51,51,1) 0%, rgba(77,77,77,1) 77%, rgba(85,85,85,1) 100%);
+    background: linear-gradient(to right, rgba(51,51,51,1) 0%, rgba(77,77,77,1) 77%, rgba(85,85,85,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#555555', GradientType=1 );
+}
+
+body[data-theme="dark"] #PgCardDesign .cardRow .cardOption.disabled{
+    background: rgba(0,0,0,0.6);
+}

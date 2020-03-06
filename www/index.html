@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/global.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/dark.css">
+        <title>Pexeso: Wild Animals</title>
+    </head>
+    <body>
+        <div id="App" class="app">
+            <div id="LoadScreen" class="w100 h100 flex-column wrap">
+                <div class="lds-ripple"><div></div><div></div></div>
+                <div id="LoadText" class="w100">
+                    <span data-trans="loading">Loading...</span>
+                </div>
+            </div>
+            <div id="PgMain" class="flex page">
+                <div id="ConMainTop" class="topPanel flex-row nowrap">
+                    <div class="btn btn_close" data-action="Quit"></div>
+                    <div class="starsCont">
+                        <div class="starIcon"></div>
+                        <div class="starNum">0</div>
+                    </div>
+                </div>
+                <div class="mainActivity flex-row wrap">
+                    <div id="PlayBtnCont" class="flex-row nowrap">
+                        <div class="btn btn_newGame" data-action="ShowGameDialog"></div>
+                    </div>
+                    <div id="MoreBtnCont">
+                        <div class="btn btn_showSettings" data-action="ShowSettings"></div>
+                        <div class="btn btn_cardDesign" data-action="CardDesign"></div>
+                    </div>
+                    <div id="GameDifficultyDialog" class="dialog_container">
+                        <div class="">
+                            <div class="dialog_header"><div class="btn btn_closeDialog" data-action="CloseDialog"></div><span data-trans="difficulty">Obtížnost</span></div>
+                            <div class="dialog_body">
+                                <div class="btn btn_gameEasy" data-action="NewGame" data-option="1" data-trans="easy">Snadný</div>
+                                <div class="btn btn_gameModerate" data-action="NewGame" data-option="2" data-trans="moderate">Pokročilý</div>
+                                <div class="btn btn_gameHard" data-action="NewGame" data-option="3" data-trans="hard">Těžký</div>
+                                <div class="btn btn_gameTablet" data-action="NewGame" data-option="4" data-trans="tablet">Tablet</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="GameContionueDialog" class="dialog_container">
+                        <div class="">
+                            <div class="dialog_header"><div class="btn btn_closeDialog" data-action="CloseDialog"></div></div>
+                            <div class="dialog_body">
+                                <div class="btn btn_gameContinue" data-action="LoadGame" data-trans="continue">Pokračovat</div>
+                                <div class="btn btn_gameNewGame" data-action="ShowDifficultyDialog" data-trans="new_game">Nová Hra</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="PgSettings" class="none page">
+                <div id="ConSettingsTop" class="topPanel flex-row nowrap">
+                    <div class="btn btn_back" data-action="ShowMain"></div>
+                    <div class="topPanel_text" data-trans="settings">Nastavení</div>
+                </div>
+                <div id="ConSettingsOptions" class="topPanel flex-row nowrap">
+                    <div class="option_settings selected" data-action="ShowSettingsCategory" data-option="1">
+                        <span data-trans="game">Hra</span>
+                    </div>
+                    <div class="option_settings" data-action="ShowSettingsCategory" data-option="2">
+                        <span data-trans="language">Jazyk</span>
+                    </div>
+                    <div class="option_settings" data-action="ShowSettingsCategory" data-option="3">
+                        <span data-trans="ads">Reklamy</span>
+                    </div>
+                </div>
+                <div class="mainActivity flex-row wrap">
+                    <div id="SettingsCategoryGame" class="settings_category">
+                        <section class="w100 flex-row wrap">
+                            <header class="w100" data-trans="theme">Theme</header>
+                            <div class="w100">
+                                <div class="settingsRow flex-row nowrap">
+                                    <div class="themeOption flex-row nowrap w100 option" data-action="SetTheme" data-option="light">
+                                        <div class="themeName"><span data-trans="light">Light</span></div>
+                                        <div class="radioContainer">
+                                            <div class="radio"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settingsRow flex-row nowrap">
+                                    <div class="themeOption flex-row nowrap w100 option" data-action="SetTheme" data-option="dark">
+                                        <div class="themeName"><span data-trans="dark">Dark</span></div>
+                                        <div class="radioContainer">
+                                            <div class="radio"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div id="SettingsCategoryLang" class="settings_category none">
+                        <div class="settingsRow flex-row nowrap">
+                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="czech">
+                                <div class="settingLangContainer flex-row nowrap">
+                                    <div class="flagContainer">
+                                        <div class="langFlag" data-flag="czech"></div>
+                                    </div>
+                                    <div class="langName"><span >Čeština</span></div>
+                                </div>
+                                <div class="radioContainer">
+                                    <div class="radio"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settingsRow flex-row nowrap">
+                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="english">
+                                <div class="settingLangContainer flex-row nowrap">
+                                    <div class="flagContainer">
+                                        <div class="langFlag" data-flag="english"></div>
+                                    </div>
+                                    <div class="langName"><span>English</span></div>
+                                </div>
+                                <div class="radioContainer">
+                                    <div class="radio"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settingsRow flex-row nowrap">
+                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="france">
+                                <div class="settingLangContainer flex-row nowrap">
+                                    <div class="flagContainer">
+                                        <div class="langFlag" data-flag="france"></div>
+                                    </div>
+                                    <div class="langName"><span>Le français</span></div>
+                                </div>
+                                <div class="radioContainer">
+                                    <div class="radio"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settingsRow flex-row nowrap">
+                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="german">
+                                <div class="settingLangContainer flex-row nowrap">
+                                    <div class="flagContainer">
+                                        <div class="langFlag" data-flag="germany"></div>
+                                    </div>
+                                    <div class="langName"><span>German</span></div>
+                                </div>
+                                <div class="radioContainer">
+                                    <div class="radio"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="SettingsCategoryAds" class="settings_category none">
+                        <div class="settingsRow flex-row nowrap">
+                            <div class="adOption flex-row nowrap option" data-action="SetAdsPreferences" data-option="Banner">
+                                <div class="settingAdText flex-column nowrap" >
+                                    <div class="adName" data-trans="banner">Banner</div>
+                                    <div class="adDescription" data-trans="banner_info">Banner bude neustále zobrazen ve spodní části obrazovky</div>
+                                </div>
+                                <div class="radioContainer">
+                                    <div class="radio"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settingsRow flex-row nowrap">
+                            <div class="adOption flex-row nowrap option" data-action="SetAdsPreferences" data-option="Interstitial">
+                                <div class="settingAdText flex-column nowrap">
+                                    <div class="adName" data-trans="fullscreen">Fullscreen</div>
+                                    <div class="adDescription" data-trans="full_info">Před začátkem hry se zobrazí reklama přes celou obrazovku</div>
+                                </div>
+                                <div class="radioContainer">
+                                    <div class="radio"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="PgCardDesign" class="none page">
+                <div id="ConCardDesignTop" class="topPanel flex-row nowrap">
+                    <div class="btn btn_back" data-action="ShowMain"></div>
+                    <div class="topPanel_text" data-trans="cards">Karty</div>
+                    <div class="starsCont">
+                        <div class="starIcon"></div>
+                        <div class="starNum">0</div>
+                    </div>
+                </div>
+                <div class="mainActivity flex-row wrap">
+                    <div id="BuyCardDialog" class="dialog_container">
+                        <div class="">
+                            <div class="dialog_body flex-row wrap">
+                                <div class="buyCardInfo flex-column nowrap w100">
+                                    <div class="buyCardInfoText w100" data-trans="approve">Potvrdit?</div>
+                                    <div class="buyCardInfoPrice w100 flex-row nowrap">
+                                        <div class="cardPrice"></div>
+                                        <div class="starsIcon"></div>
+                                    </div>
+                                </div>
+                                <div class="btn btn_buyCard" data-action="BuyCard" data-option="1" data-trans="buy">Koupit</div>
+                                <div class="btn btn_cancel" data-action="CloseDialog" data-option="2" data-trans="cancel">Zrušit</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-column nowrap w100">
+                        <div class="cardRow flex-row nowrap">
+                            <div class="cardOption flex-row nowrap option" data-action="SetCard" data-option="default">
+                                <div class="cardSelectionContainer flex-row nowrap">
+                                    <div class="cardImageContainer">
+                                        <div class="cardImage" data-card="default"></div>
+                                    </div>
+                                    <div class="cardName"><span>Default</span></div>
+                                </div>
+                                <div class="radioContainer buyContainer">
+                                    <div class="btn btn_buyCard flex-row nowrap">
+                                        <div class="cardPrice"></div>
+                                        <div class="starsIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cardRow flex-row nowrap">
+                            <div class="cardOption flex-row nowrap option" data-action="SetCard" data-option="hawk">
+                                <div class="cardSelectionContainer flex-row nowrap">
+                                    <div class="cardImageContainer">
+                                        <div class="cardImage" data-card="hawk"></div>
+                                    </div>
+                                    <div class="cardName"><span>Hawk</span></div>
+                                </div>
+                                <div class="radioContainer buyContainer">
+                                    <div class="btn btn_buyCard flex-row nowrap">
+                                        <div class="cardPrice"></div>
+                                        <div class="starsIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cardRow flex-row nowrap">
+                            <div class="cardOption flex-row nowrap option" data-action="SetCard" data-option="panther">
+                                <div class="cardSelectionContainer flex-row nowrap">
+                                    <div class="cardImageContainer">
+                                        <div class="cardImage" data-card="panther"></div>
+                                    </div>
+                                    <div class="cardName"><span>Panther</span></div>
+                                </div>
+                                <div class="radioContainer buyContainer">
+                                    <div class="btn btn_buyCard flex-row nowrap">
+                                        <div class="cardPrice"></div>
+                                        <div class="starsIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cardRow flex-row nowrap">
+                            <div class="cardOption flex-row nowrap option" data-action="SetCard" data-option="bear">
+                                <div class="cardSelectionContainer flex-row nowrap">
+                                    <div class="cardImageContainer">
+                                        <div class="cardImage" data-card="bear"></div>
+                                    </div>
+                                    <div class="cardName"><span>Bear</span></div>
+                                </div>
+                                <div class="radioContainer buyContainer">
+                                    <div class="btn btn_buyCard flex-row nowrap">
+                                        <div class="cardPrice"></div>
+                                        <div class="starsIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="PgGame" class="none page">
+                <div id="ConGameTop" class="topPanel flex-row nowrap">
+                    <div class="btn btn_back" data-action="ShowMainSave"></div>
+                    <div class="topPanel_text">
+                        <div class="movesCont">
+                            <div class="movesText" data-trans="moves">Tahy</div>
+                            <div class="movesNum"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainActivity flex-row wrap">
+
+                </div>
+                <div id="GameResultDialog" class="dialog_container">
+                    <div class="">
+                        <div class="dialog_header" data-trans="results">Výsledky</div>
+                        <div class="dialog_body">
+                            <div class="starsContainer">
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                            </div>
+                            <div class="endGameResults">
+                                <div class="hintsResult resultRow"><span class="key" data-trans="moves">Tahy </span><span class="value">250</span></div>
+                                <div class="timeResult resultRow"><span class="key" data-trans="time">Čas </span><span class="value">1:40</span></div>
+                            </div>
+                            <div class="endGameOptions">
+                                <div class="btn btn_mainMenu" data-action="ShowMain"></div>
+                                <div class="btn btn_repeatGame" data-action="RepeatGame"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/services/StorageManager/StorageManager.js"></script>
+        <script type="text/javascript" src="js/services/LangLoader/LangLoader.js"></script>
+        <script type="text/javascript" src="js/services/AdsManager/AdsManager.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,671 @@
+body{
+    background: #f2f2f2;
+}
+
+#App, #PgMain, #PgSettings, #PgGame, #PgCardDesign{
+    width: 100%;
+    height: 100%;
+}
+
+#PgMain, #PgSettings, #PgGame, #PgCardDesign{
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#PgMain > .mainActivity{
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/background.jpg");
+}
+
+.topPanel{
+    background: #00b5ff;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+}
+
+.topPanel .btn{
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+.topPanel .topPanel_text{
+    width: calc(100% - 25px);
+    height: 24px;
+    font-size: 24px;
+    color: white;
+    margin-right: 12.5px;
+    text-align: center
+}
+
+.btn_close{
+    background-image: url('../img/gui/close_white.png');
+    margin-left: 10px;
+}
+
+.btn_back{
+    background-image: url('../img/gui/left_arrow_white.png');
+    margin-left: 4px;
+}
+
+.btn_newGame, .btn_showSettings, .btn_cardDesign{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.btn_newGame{
+    background-image: url('../img/gui/icon_play.png');
+    height: calc(25vh - 25px);
+    width: calc(25vh - 25px);
+}
+
+.btn_showSettings{
+    background-image: url('../img/gui/icon_settings.png');
+    width: calc(12vh - 10px);
+    margin-right: 5px;
+}
+
+.btn_cardDesign{
+    background-image: url('../img/gui/icon_cards.png');
+    width: calc(12vh - 10px);
+}
+
+
+.mainActivity{
+    width: 100%;
+    flex-grow: 1;
+}
+
+#PgMain .mainActivity{
+    align-items: center;
+    align-content: center;
+}
+
+#PgGame .mainActivity{
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.mainActivity #PlayBtnCont{
+    width: 100%;
+    height: calc(25vh - 25px); /* Pokud nastavíme procenta, některé prohlížeče nastaví výšku 0 */
+    justify-content: center;
+}
+
+#MoreBtnCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 12vh;
+    padding-top: 10px;
+}
+
+.card{
+    margin-top: 2px;
+    position: relative;
+    -webkit-transition: -webkit-transform 0.2s, opacity 0.1s ease-in-out;
+    -moz-transition: -moz-transform 0.2s, opacity 0.1s ease-in-out;
+    -o-transition: -o-transform 0.2s, opacity 0.1s ease-in-out;
+    transition: transform 0.2s, opacity 0.1s ease-in-out;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 50% 50%;
+}
+
+.card div{
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card_back, .card_front{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 7%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.card_back{
+    background-image: url('../img/gui/cards/card_back.png');
+}
+
+.card_back[data-card="hawk"]{
+    background-image: url("../img/gui/cards/card_back_hawk.png");
+}
+.card_back[data-card="panther"]{
+    background-image: url("../img/gui/cards/card_back_panther.png");
+}
+.card_back[data-card="bear"]{
+    background-image: url("../img/gui/cards/card_back_bear.png");
+}
+
+.card_front{
+    -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+}
+
+
+.card.flipped {
+    -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+}
+
+.dialog_container{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.dialog_container > div{
+    width: 80%;
+    background: white;
+}
+
+.dialog_container .dialog_header{
+    width: 100%;
+    padding: 13px 0;
+    height: 50px;
+    text-align: center;
+    background: #00b5ff;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 15px;
+    font-weight: bold;
+    position: relative;
+}
+
+.dialog_container .dialog_body{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+#GameDifficultyDialog .dialog_body .btn, #GameContionueDialog .dialog_body .btn{
+    margin-bottom: 15px;
+    height: 46px;
+    width: 90%;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+#GameDifficultyDialog .btn_gameEasy, #BuyCardDialog .btn_buyCard, #GameContionueDialog .btn_gameContinue{
+    background: #00a865;
+    border: 3px solid #00854b;
+}
+
+#GameDifficultyDialog .btn_gameModerate{
+    background: #ffb415;
+    border: 3px solid #ffa312;
+}
+
+
+#GameDifficultyDialog .btn_gameHard, #BuyCardDialog .btn_cancel, #GameContionueDialog .btn_gameNewGame{
+    background: #ee294b;
+    border: 3px solid #bd152f;
+}
+
+#GameDifficultyDialog .btn_gameTablet{
+    background: #ff2f73;
+    border: 3px solid #a21f59;
+}
+
+#GameDifficultyDialog .btn_closeDialog, #BuyCardDialog .btn_closeDialog, #GameContionueDialog .btn_closeDialog{
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 24px;
+    width: 24px;
+    background-image: url('../img/gui/close_white.png');
+}
+
+#ConSettingsOptions{
+    height: 40px;
+    background: rgba(0,115,153,1);
+    background: -moz-linear-gradient(top, rgba(0,115,153,1) 0%, rgba(36,197,255,1) 8%, rgba(36,197,255,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,115,153,1)), color-stop(8%, rgba(36,197,255,1)), color-stop(100%, rgba(36,197,255,1)));
+    background: -webkit-linear-gradient(top, rgba(0,115,153,1) 0%, rgba(36,197,255,1) 8%, rgba(36,197,255,1) 100%);
+    background: -o-linear-gradient(top, rgba(0,115,153,1) 0%, rgba(36,197,255,1) 8%, rgba(36,197,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(0,115,153,1) 0%, rgba(36,197,255,1) 8%, rgba(36,197,255,1) 100%);
+    background: linear-gradient(to bottom, rgba(0,115,153,1) 0%, rgba(36,197,255,1) 8%, rgba(36,197,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007399', endColorstr='#24c5ff', GradientType=0 );
+    padding: 2px 0;
+    justify-content: center;
+}
+
+#ConSettingsOptions .option_settings{
+    height: calc(100% - 8px);
+    margin: 2px 15px 2px 0;
+    color: white;
+    padding: 5px 4px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+#ConSettingsOptions .option_settings.selected{
+    border-bottom: 3px solid white;
+}
+
+#PgSettings .settingsRow, #PgSettings, #SettingsCategoryGame,#SettingsCategoryAds, #SettingsCategoryAds .adOption, #PgCardDesign .cardRow{
+    width: 100%;
+}
+
+#SettingsCategoryGame section header{
+    margin: 10px 5px 0 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+}
+
+#SettingsCategoryAds .adOption{
+    margin: 10px 5px 0 5px;
+}
+
+#SettingsCategoryAds .settingAdText{
+    width: calc(100% - 40px);
+}
+
+.settingAdText .adName, .settingAdText .adDescription{
+    width: 100%;
+}
+
+.settingAdText .adName{
+    font-size: 24px;
+    padding: 5px
+}
+
+.settingAdText .adDescription{
+    font-size: 11px;
+    color: #666666;
+    padding: 0 0 5px 5px;
+}
+
+.radioContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 100%;
+}
+
+.radioContainer .radio{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/radio_empty.svg");
+}
+
+.radio.selected{
+    background-image: url("../img/gui/radio_selected.svg");
+}
+
+.adOption .radioContainer .radio{
+    width: 30px;
+    height: 30px;
+}
+
+#SettingsCategoryLang {
+    width: 100%;
+}
+
+#PgSettings .option, #PgCardDesign .option{
+    width: 100%;
+    height: 50px;
+    margin: 5px 5px 0 5px;
+    background: rgba(248,248,248,1);
+    background: -moz-linear-gradient(left, rgb(238, 238, 238) 0%, rgb(240, 240, 240) 77%, rgba(242,242,242,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(238, 238, 238,1)), color-stop(77%, rgba(240, 240, 240,1)), color-stop(100%, rgba(242,242,242,1)));
+    background: -webkit-linear-gradient(left, rgba(238, 238, 238,1) 0%, rgba(240, 240, 240,1) 77%, rgba(242,242,242,1) 100%);
+    background: -o-linear-gradient(left, rgba(238, 238, 238,1) 0%, rgba(240, 240, 240,1) 77%, rgba(242,242,242,1) 100%);
+    background: -ms-linear-gradient(left, rgba(238, 238, 238,1) 0%, rgba(240, 240, 240,1) 77%, rgba(242,242,242,1) 100%);
+    background: linear-gradient(to right, rgba(238, 238, 238,1) 0%, rgba(240, 240, 240,1) 77%, rgba(242,242,242,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ffffff', GradientType=1 );
+}
+
+#PgCardDesign .cardRow:nth-of-type(even) .option, #PgSettings .settingsRow:nth-of-type(even) .option{
+    background: rgba(240,240,240,1);
+    background: -moz-linear-gradient(left, rgb(230, 230, 230) 0%, rgb(238, 238, 238) 77%, rgba(242,242,242,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(230, 230, 230,1)), color-stop(77%, rgba(238, 238, 238,1)), color-stop(100%, rgba(242,242,242,1)));
+    background: -webkit-linear-gradient(left, rgba(230, 230, 230,1) 0%, rgba(238, 238, 238,1) 77%, rgba(242,242,242,1) 100%);
+    background: -o-linear-gradient(left, rgba(230, 230, 230,1) 0%, rgba(238, 238, 238,1) 77%, rgba(242,242,242,1) 100%);
+    background: -ms-linear-gradient(left, rgba(230, 230, 230,1) 0%, rgba(238, 238, 238,1) 77%, rgba(242,242,242,1) 100%);
+    background: linear-gradient(to right, rgba(230, 230, 230,1) 0%, rgba(238, 238, 238,1) 77%, rgba(242,242,242,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#ffffff', GradientType=1 );
+}
+
+#PgCardDesign .cardRow .cardOption.disabled{
+    background: rgba(0,0,0,0.6);
+}
+
+#PgCardDesign .cardOption.disabled > *{
+    opacity: 0.5;
+}
+
+.settingLangContainer, .cardSelectionContainer{
+    width: calc(100% - 40px);
+    height: 100%;
+}
+
+.settingLangContainer .flagContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 100%;
+}
+
+.settingLangContainer .flagContainer .langFlag{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.settingLangContainer .flagContainer .langFlag[data-flag="czech"]{
+    background-image: url("../img/gui/flags/flag_czechia.svg");
+}
+.settingLangContainer .flagContainer .langFlag[data-flag="english"]{
+    background-image: url("../img/gui/flags/flag_english.svg");
+}
+.settingLangContainer .flagContainer .langFlag[data-flag="france"]{
+    background-image: url("../img/gui/flags/flag_france.svg");
+}
+.settingLangContainer .flagContainer .langFlag[data-flag="germany"]{
+    background-image: url("../img/gui/flags/flag_germany.svg");
+}
+
+.settingLangContainer .langName, .cardSelectionContainer .cardName, .themeOption .themeName{
+    display: flex;
+    width: calc(100% - 75px);
+    align-items: center;
+    font-size: 20px;
+    padding: 0 10px
+}
+
+.themeOption .themeName{
+    width: calc(100% - 40px);
+    height: 100%;
+}
+
+#SettingsCategoryLang .radioContainer .radio, #PgCardDesign .radioContainer .radio, .themeOption .radioContainer .radio{
+    width: 30px;
+    height: 30px;
+}
+
+#PgGame .topPanel .topPanel_text{
+    height: calc(100% - 10px);
+}
+
+#PgGame .movesCont{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center
+}
+
+#PgGame .movesText{
+    font-size: 10px;
+}
+
+#PgGame .movesNum{
+    font-size: 16px;
+}
+
+#PgGame .mainActivity{
+    background-image:
+            url("../img/gui/bg_grid.png"),
+            url("../img/gui/paw.png");
+    background-position:
+            top left,
+            center center; /* this positions the second image */
+    background-repeat:
+            repeat,
+            no-repeat; /* this applies to both images */
+    background-size:
+            auto,
+            contain;
+}
+
+#PgMain .starsCont, #PgCardDesign .starsCont{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    align-items: center;
+    margin-right: 15px;
+    padding: 2px 4px;
+}
+
+#PgMain .starNum, #PgCardDesign .starNum{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 5px;
+    color: white;
+}
+
+#PgMain .starIcon, #PgCardDesign .starIcon{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/star_full.png");
+    height: 26px;
+    width: 26px;
+}
+
+#ConMainTop{
+    justify-content: space-between;
+}
+
+#GameResultDialog .starsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 8vh;
+    text-align: center;
+}
+
+#GameResultDialog .starsContainer .star{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/star_empty.png");
+    height: 8vh;
+    width: 8vh;
+}
+
+#GameResultDialog .starsContainer .star.full{
+    background-image: url("../img/gui/star_full.png");
+}
+
+#GameResultDialog .endGameResults{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#GameResultDialog .endGameResults .resultRow{
+    display: flex;
+    flex-direction: row;
+    width: 160px;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+#GameResultDialog .endGameResults .resultRow .key{
+    width: 50%;
+    font-weight: bold;
+    text-align: left;
+}
+
+#GameResultDialog .endGameResults .resultRow .value{
+    width: 50%;
+    text-align: right;
+}
+
+#GameResultDialog .endGameOptions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    margin: 20px 0;
+}
+
+#GameResultDialog .endGameOptions .btn_mainMenu{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/left_arrow_black.png");
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+#GameResultDialog .endGameOptions .btn_repeatGame{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/icon_repeat_black.png");
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+}
+
+#PgCardDesign .cardOption .cardImageContainer{
+    width: 50px;
+    height: 50px
+}
+
+#PgCardDesign .cardImageContainer .cardImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+}
+
+#PgCardDesign .cardImageContainer .cardImage[data-card="default"]{
+    background-image: url("../img/gui/card_back.png");
+}
+#PgCardDesign .cardImageContainer .cardImage[data-card="hawk"]{
+    background-image: url("../img/gui/cards/card_back_hawk.png");
+}
+#PgCardDesign .cardImageContainer .cardImage[data-card="panther"]{
+    background-image: url("../img/gui/cards/card_back_panther.png");
+}
+#PgCardDesign .cardImageContainer .cardImage[data-card="bear"]{
+    background-image: url("../img/gui/cards/card_back_bear.png");
+}
+
+#PgCardDesign .btn_buyCard{
+    width: auto;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+#PgCardDesign .starsIcon{
+    width: 20px;
+    height: 20px;
+    background-image: url("../img/gui/star_full.png");
+    background-size: contain;
+}
+
+#PgCardDesign .cardPrice{
+    width: 70px;
+    margin-right: 5px;
+    font-size: 14px;
+    text-align: right;
+    font-weight: bold;
+}
+
+#PgCardDesign .radioContainer.buyContainer{
+    width: 105px;
+    padding-right: 5px;
+}
+
+#PgCardDesign .cardName{
+    width: calc(100% - 175px);
+}
+#PgCardDesign .buyIcon{
+    width: 30px;
+    height: 30px;
+}
+
+#BuyCardDialog .buyCardInfo{
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+#BuyCardDialog .buyCardInfo .starsIcon{
+    width: 22px;
+    height: 22px;
+}
+
+#BuyCardDialog .buyCardInfo .cardPrice{
+    font-size: 20px;
+}
+
+#BuyCardDialog .buyCardInfoText{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#BuyCardDialog .buyCardInfoPrice{
+    justify-content: center;
+    align-items: center;
+}
+
+
+#BuyCardDialog .btn_buyCard, #BuyCardDialog .btn_cancel{
+    padding: 5px 8px;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 5px 0 20px 0;
+    height: 34px;
+}
+
+#BuyCardDialog .btn_buyCard{
+    margin-right: 20px;
+}
+
