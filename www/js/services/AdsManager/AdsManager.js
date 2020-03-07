@@ -51,10 +51,13 @@ function hideBanner() {
 // Zobrazí celoobrazovkovou reklamu, pokud je povolena
 function showInterstitial(){
     let isInterstitialAllowed = storageMng.getValue('allowInterstitial');
+    let gamesPlayed = parseInt(storageMng.getValue('gamesPlayed'));
 
     if(isInterstitialAllowed === 'allow'){
         AdMob.isInterstitialReady(function(isready){
-            if(isready) AdMob.showInterstitial();
+            if(adsLimiterCheck() && gamesPlayed > 3 && isready){
+                AdMob.showInterstitial();
+            }
         });
     }
 }
@@ -73,5 +76,23 @@ function changeInterstitialAllow(allowed){
 function iniAdsSettings(allowBanner = 'disallow', allowInterstitial = 'allow'){
     storageMng.iniValueFirstTime('allowBanner', allowBanner);
     storageMng.iniValueFirstTime('allowInterstitial', allowInterstitial);
+}
+
+function adsLimiterCheck(){
+    let date = new Date();
+    let actualTime = date.getTime();
+    let lastAdsTime = storageMng.getValue('adLimiter');
+
+    if(lastAdsTime !== null){
+        let totalTimeSec = (actualTime - parseInt(lastAdsTime)) / 1000;
+        let timeMins = Math.floor(totalTimeSec / 60);
+        if(timeMins > 3){
+            storageMng.setValue('adLimiter', actualTime);
+            return true;
+        }
+    }else{
+        storageMng.setValue('adLimiter', actualTime);
+    }
+    return false;
 }
 

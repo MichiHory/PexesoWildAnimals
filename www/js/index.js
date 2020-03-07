@@ -121,6 +121,8 @@ var app = {
 
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        document.addEventListener('pause', this.onPause.bind(this), false);
+        document.addEventListener('backbutton', this.onBackKeyDown.bind(this), false);
     },
 
     // deviceready Event Handler
@@ -148,6 +150,18 @@ var app = {
 
         if(pgGame.classList.contains('flex')){
             this.saveGame();
+        }
+    },
+
+    onBackKeyDown: function(e){
+        e.preventDefault()
+        let pgGame = document.getElementById('PgGame');
+        let pgMain = document.getElementById('PgMain');
+
+        if(pgGame.classList.contains('flex')){
+            this.saveGame();
+        }else if(!pgMain.classList.contains('flex')){
+            this.actionShowMain();
         }
     },
 
@@ -605,6 +619,9 @@ var app = {
 
         this.showAllCards();
         setTimeout(function () {
+            let gamesPlayed = parseInt(storageMng.getValue('gamesPlayed'));
+            gamesPlayed++;
+
             let gameResultDialog = document.getElementById('GameResultDialog');
             let cards = document.getElementsByClassName('card').length;
             let stars = 1 + Math.floor((cards) / (application.moves / (application.difficulty * 1.2)));
@@ -622,7 +639,10 @@ var app = {
             document.querySelector('#GameResultDialog .resultRow.timeResult .value').innerHTML = formattedTime;
 
             gameResultDialog.style.display = "flex";
+
             storageMng.setValue('saved', '0');
+            storageMng.setValue('gamesPlayed', gamesPlayed);
+
             showInterstitial();
         }, 1000);
     },
@@ -630,6 +650,7 @@ var app = {
     iniStorageValues: function(){
         storageMng.iniValueFirstTime('playerStars', '0');
         storageMng.iniValueFirstTime('theme', 'light');
+        storageMng.iniValueFirstTime('gamesPlayed', '0');
     },
 
     showStars: function () {
@@ -760,7 +781,6 @@ var app = {
             cards.forEach(function (card) {
                 let cardImg = card.dataset.imagename;
 
-                console.log(card);
                 let cardFlipped = 0;
                 let cardHidden = 0;
                 if(card.classList.contains('flipped')){
@@ -778,12 +798,11 @@ var app = {
                 });
             });
         }
-        let savedOptions = { 'difficulty' : this.difficulty, 'moves' : this.moves};
+        let savedOptions = { 'difficulty' : this.difficulty, 'moves' : this.moves, 'time' : this.time};
 
         storageMng.setValue('savedCards', JSON.stringify(savedCards));
         storageMng.setValue('savedOptions', JSON.stringify(savedOptions));
         storageMng.setValue('saved', '1');
-        console.log(savedCards);
     },
 
     loadGame: function () {
@@ -805,6 +824,9 @@ var app = {
         });
 
         document.querySelector("#PgGame .movesNum").textContent = options.moves;
+        this.time = options.time;
+        this.moves = options.moves;
+        this.difficulty = options.difficulty;
 
         switch(options.difficulty){
             case "1": images = 4; break;
@@ -831,6 +853,31 @@ var app = {
                 });
 
             });
+        }
+
+        let flipped = document.querySelectorAll('.card.flipped');
+        let restCards = document.querySelectorAll('.card:not(.hidden)');
+
+        if(restCards.length <= 6){
+            let interestial = storageMng.getValue('allowInterstitial');
+
+            if(interestial === 'allow'){
+                prepareInterstitialAd(true);
+            }
+        }
+
+        if(flipped.length === 2){
+            if(flipped[0].dataset.img === flipped[1].dataset.img){
+                flipped.forEach(function (card) {
+                    card.classList.add("hidden");
+                    card.classList.remove("flipped");
+                });
+            }else{
+                setTimeout(function () {
+                    flipped[0].classList.remove("flipped");
+                    flipped[1].classList.remove("flipped");
+                }, 800);
+            }
         }
     }
 };

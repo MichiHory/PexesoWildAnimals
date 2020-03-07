@@ -121,6 +121,8 @@ var app = {
 
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        document.addEventListener('pause', this.onPause.bind(this), false);
+        document.addEventListener('backbutton', this.onBackKeyDown.bind(this), false);
     },
 
     // deviceready Event Handler
@@ -141,6 +143,26 @@ var app = {
                 application.doAction(item.dataset.action, item)
             });
         });
+    },
+
+    onPause: function(){
+        let pgGame = document.getElementById('PgGame');
+
+        if(pgGame.classList.contains('flex')){
+            this.saveGame();
+        }
+    },
+
+    onBackKeyDown: function(e){
+        e.preventDefault()
+        let pgGame = document.getElementById('PgGame');
+        let pgMain = document.getElementById('PgMain');
+
+        if(pgGame.classList.contains('flex')){
+            this.saveGame();
+        }else if(!pgGame.classList.contains('flex')){
+            this.actionShowMain();
+        }
     },
 
     prepareApplication: function () {
@@ -186,10 +208,6 @@ var app = {
         this.prepareGame(this.difficulty);
     },
 
-    actionRepeatGame: function (button) {
-        this.prepareGame(this.difficulty);
-    },
-
     actionShowMain: function () {
         let pages = document.querySelectorAll('#App > div.flex');
         let PgMain = document.getElementById('PgMain');
@@ -200,6 +218,11 @@ var app = {
         this.setAdsSettingRadio();
         this.setLangRadio();
         this.setCardSettingsRatio();
+    },
+
+    actionShowMainSave: function () {
+        this.saveGame();
+        this.actionShowMain();
     },
 
     actionShowSettings: function () {
@@ -216,7 +239,28 @@ var app = {
         this.showHidePage(pages, PgMain);
     },
 
-    actionShowDialogDifficulty: function () {
+    actionShowGameDialog: function () {
+        let savedGame = storageMng.getValue('saved');
+
+        if(savedGame == '1'){
+            let GameContionueDialog = document.getElementById('GameContionueDialog');
+            GameContionueDialog.style.display = "flex";
+        }else{
+            let gameDifficultyDialog = document.getElementById('GameDifficultyDialog');
+            gameDifficultyDialog.style.display = "flex";
+        }
+    },
+
+    actionLoadGame: function () {
+        let pages = document.querySelectorAll('#App > div.flex');
+        let PgGame = document.getElementById('PgGame');
+
+        this.showHidePage(pages, PgGame);
+        this.loadGame();
+    },
+
+    actionShowDifficultyDialog: function () {
+        this.hideDialogs();
         let gameDifficultyDialog = document.getElementById('GameDifficultyDialog');
         gameDifficultyDialog.style.display = "flex";
     },
@@ -224,6 +268,10 @@ var app = {
     actionCloseDialog: function (element) {
         let dialog = element.closest(".dialog_container");
         dialog.style.removeProperty('display');
+    },
+
+    actionRepeatGame: function (button) {
+        this.prepareGame(this.difficulty);
     },
 
     actionSetAdsPreferences: function (element) {
@@ -330,6 +378,10 @@ var app = {
     },
 
     actionFlipCard: function(card){
+        if(card.classList.contains('hidden')){
+            return;
+        }
+
         let application = this;
         let flipped = document.querySelectorAll('.card.flipped');
 
@@ -381,6 +433,13 @@ var app = {
         show.classList.add('flex');
     },
 
+    getCardSize: function(numOfImages){
+        let PgGame = document.querySelector('#PgGame .mainActivity');
+        let width = PgGame.offsetWidth;
+
+        return Math.floor((width - (2 * numOfImages)) / numOfImages);
+    },
+
     prepareGame: function (difficulty) {
         this.hideDialogs();
         this.removeAllCards();
@@ -396,8 +455,7 @@ var app = {
 
         document.querySelector("#PgGame .movesNum").textContent = application.moves;
 
-        let PgGame = document.querySelectorAll('#PgGame .mainActivity');
-        PgGame = PgGame[0];
+        let PgGame = document.querySelector('#PgGame .mainActivity');
 
         let images = 4;
 
@@ -408,10 +466,9 @@ var app = {
             case "4": images = 7; break;
         }
 
-        let width = PgGame.offsetWidth;
         let height = parseInt(window.getComputedStyle(PgGame, null).getPropertyValue("height"));
 
-        let size = Math.floor((width - (2 * images)) / images);
+        let size = this.getCardSize(images);
         let rows = Math.floor((height - (2 * images) - 60) / size);
 
         let cardsAmount = this.isOdd(images * rows) ? images * (rows - 1) : images * rows;
@@ -438,6 +495,7 @@ var app = {
         card.style.cssText = "height: " + size + "px;" + "width: " + size + "px;";
         card.setAttribute('data-action', 'FlipCard');
         card.innerHTML = '<div class="card_back"></div>';
+        card.dataset.imagename = image;
 
         let cardImage = document.createElement("div");
         cardImage.className = "card_front";
@@ -561,6 +619,9 @@ var app = {
 
         this.showAllCards();
         setTimeout(function () {
+            let gamesPlayed = parseInt(storageMng.getValue('gamesPlayed'));
+            gamesPlayed++;
+
             let gameResultDialog = document.getElementById('GameResultDialog');
             let cards = document.getElementsByClassName('card').length;
             let stars = 1 + Math.floor((cards) / (application.moves / (application.difficulty * 1.2)));
@@ -578,6 +639,10 @@ var app = {
             document.querySelector('#GameResultDialog .resultRow.timeResult .value').innerHTML = formattedTime;
 
             gameResultDialog.style.display = "flex";
+
+            storageMng.setValue('saved', '0');
+            storageMng.setValue('gamesPlayed', gamesPlayed);
+
             showInterstitial();
         }, 1000);
     },
@@ -585,6 +650,7 @@ var app = {
     iniStorageValues: function(){
         storageMng.iniValueFirstTime('playerStars', '0');
         storageMng.iniValueFirstTime('theme', 'light');
+        storageMng.iniValueFirstTime('gamesPlayed', '0');
     },
 
     showStars: function () {
@@ -704,6 +770,115 @@ var app = {
 
     drawTheme: function () {
         document.body.dataset.theme = storageMng.getValue('theme');
+    },
+
+    saveGame: function () {
+        let application = this;
+        let cards = document.querySelectorAll('.card');
+        let savedCards = [];
+
+        if(typeof cards !== "undefined" && cards.length > 0){
+            cards.forEach(function (card) {
+                let cardImg = card.dataset.imagename;
+
+                let cardFlipped = 0;
+                let cardHidden = 0;
+                if(card.classList.contains('flipped')){
+                    cardFlipped = 1
+                }
+
+                if(card.classList.contains('hidden')){
+                    cardHidden = 1
+                }
+
+                savedCards.push({
+                    "img" : cardImg,
+                    "flipped" : cardFlipped,
+                    "hidden" : cardHidden
+                });
+            });
+        }
+        let savedOptions = { 'difficulty' : this.difficulty, 'moves' : this.moves, 'time' : this.time};
+
+        storageMng.setValue('savedCards', JSON.stringify(savedCards));
+        storageMng.setValue('savedOptions', JSON.stringify(savedOptions));
+        storageMng.setValue('saved', '1');
+    },
+
+    loadGame: function () {
+        let application = this;
+
+        this.hideDialogs();
+        this.removeAllCards();
+
+        let cards = JSON.parse(storageMng.getValue('savedCards'));
+        let options = JSON.parse(storageMng.getValue('savedOptions'));
+        let PgGame = document.querySelector('#PgGame .mainActivity');
+
+        let images = 4;
+
+        let starsElements = document.querySelectorAll("#GameResultDialog .star");
+
+        starsElements.forEach(function (star) {
+            star.classList.remove('full');
+        });
+
+        document.querySelector("#PgGame .movesNum").textContent = options.moves;
+        this.time = options.time;
+        this.moves = options.moves;
+        this.difficulty = options.difficulty;
+
+        switch(options.difficulty){
+            case "1": images = 4; break;
+            case "2": images = 5; break;
+            case "3": images = 6; break;
+            case "4": images = 7; break;
+        }
+
+        let size = this.getCardSize(images);
+
+        if(typeof cards !== "undefined" && cards.length > 0) {
+            cards.forEach(function (card) {
+                let newCard = application.createCard(size, card.img);
+
+                if(card.hidden == '1'){
+                    newCard.classList.add('hidden');
+                }else if(card.flipped == '1'){
+                    newCard.classList.add('flipped');
+                }
+
+                PgGame.appendChild(newCard);
+                newCard.addEventListener('click', function(){
+                    application.doAction(newCard.dataset.action, newCard)
+                });
+
+            });
+        }
+
+        let flipped = document.querySelectorAll('.card.flipped');
+        let restCards = document.querySelectorAll('.card:not(.hidden)');
+
+        if(restCards.length <= 6){
+            let interestial = storageMng.getValue('allowInterstitial');
+
+            if(interestial === 'allow'){
+                prepareInterstitialAd(true);
+            }
+        }
+
+        if(flipped.length === 2){
+            if(flipped[0].dataset.img === flipped[1].dataset.img){
+                flipped.forEach(function (card) {
+                    card.classList.add("hidden");
+                    card.classList.remove("flipped");
+                });
+            }else{
+                setTimeout(function () {
+                    flipped[0].classList.remove("flipped");
+                    flipped[1].classList.remove("flipped");
+                }, 800);
+            }
+        }
     }
 };
 

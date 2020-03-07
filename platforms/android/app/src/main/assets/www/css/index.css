@@ -209,7 +209,7 @@ body{
 }
 
 
-#GameDifficultyDialog .dialog_body .btn{
+#GameDifficultyDialog .dialog_body .btn, #GameContionueDialog .dialog_body .btn{
     margin-bottom: 15px;
     height: 46px;
     width: 90%;
@@ -221,7 +221,7 @@ body{
     border-radius: 10px;
 }
 
-#GameDifficultyDialog .btn_gameEasy, #BuyCardDialog .btn_buyCard{
+#GameDifficultyDialog .btn_gameEasy, #BuyCardDialog .btn_buyCard, #GameContionueDialog .btn_gameContinue{
     background: #00a865;
     border: 3px solid #00854b;
 }
@@ -232,7 +232,7 @@ body{
 }
 
 
-#GameDifficultyDialog .btn_gameHard, #BuyCardDialog .btn_cancel{
+#GameDifficultyDialog .btn_gameHard, #BuyCardDialog .btn_cancel, #GameContionueDialog .btn_gameNewGame{
     background: #ee294b;
     border: 3px solid #bd152f;
 }
@@ -242,7 +242,7 @@ body{
     border: 3px solid #a21f59;
 }
 
-#GameDifficultyDialog .btn_closeDialog, #BuyCardDialog .btn_closeDialog{
+#GameDifficultyDialog .btn_closeDialog, #BuyCardDialog .btn_closeDialog, #GameContionueDialog .btn_closeDialog{
     position: absolute;
     top: 13px;
     left: 10px;

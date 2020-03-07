@@ -55,7 +55,7 @@
                 </div>
                 <div class="mainActivity flex-row wrap">
                     <div id="PlayBtnCont" class="flex-row nowrap">
-                        <div class="btn btn_newGame" data-action="ShowDialogDifficulty"></div>
+                        <div class="btn btn_newGame" data-action="ShowGameDialog"></div>
                     </div>
                     <div id="MoreBtnCont">
                         <div class="btn btn_showSettings" data-action="ShowSettings"></div>
@@ -69,6 +69,15 @@
                                 <div class="btn btn_gameModerate" data-action="NewGame" data-option="2" data-trans="moderate">Pokročilý</div>
                                 <div class="btn btn_gameHard" data-action="NewGame" data-option="3" data-trans="hard">Těžký</div>
                                 <div class="btn btn_gameTablet" data-action="NewGame" data-option="4" data-trans="tablet">Tablet</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="GameContionueDialog" class="dialog_container">
+                        <div class="">
+                            <div class="dialog_header"><div class="btn btn_closeDialog" data-action="CloseDialog"></div></div>
+                            <div class="dialog_body">
+                                <div class="btn btn_gameContinue" data-action="LoadGame" data-trans="continue">Pokračovat</div>
+                                <div class="btn btn_gameNewGame" data-action="ShowDifficultyDialog" data-trans="new_game">Nová Hra</div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +151,7 @@
                             </div>
                         </div>
                         <div class="settingsRow flex-row nowrap">
-                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="france">
+                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="francais">
                                 <div class="settingLangContainer flex-row nowrap">
                                     <div class="flagContainer">
                                         <div class="langFlag" data-flag="france"></div>
@@ -155,7 +164,7 @@
                             </div>
                         </div>
                         <div class="settingsRow flex-row nowrap">
-                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="german">
+                            <div class="langOption flex-row nowrap option" data-action="SetLang" data-option="deutsch">
                                 <div class="settingLangContainer flex-row nowrap">
                                     <div class="flagContainer">
                                         <div class="langFlag" data-flag="germany"></div>
@@ -291,7 +300,7 @@
 
             <div id="PgGame" class="none page">
                 <div id="ConGameTop" class="topPanel flex-row nowrap">
-                    <div class="btn btn_back" data-action="ShowMain"></div>
+                    <div class="btn btn_back" data-action="ShowMainSave"></div>
                     <div class="topPanel_text">
                         <div class="movesCont">
                             <div class="movesText" data-trans="moves">Tahy</div>
