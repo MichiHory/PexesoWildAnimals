@@ -33,5 +33,37 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-dialogs": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-dialogs"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-nativestorage": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-nativestorage"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-apprate": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-apprate"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-inappbrowser": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-inappbrowser@3.2.0"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

@@ -122,6 +122,7 @@ var app = {
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
         document.addEventListener('pause', this.onPause.bind(this), false);
+        document.addEventListener('resume', this.onResume.bind(this), false);
         document.addEventListener('backbutton', this.onBackKeyDown.bind(this), false);
     },
 
@@ -153,6 +154,17 @@ var app = {
         }
     },
 
+    onResume: function(){
+        let pgGame = document.getElementById('PgGame');
+
+        setTimeout(function () {
+            if(pgGame.classList.contains('flex')){
+                storageMng.setValue('saved', '0');
+            }
+        }, 500);
+
+    },
+
     onBackKeyDown: function(e){
         e.preventDefault()
         let pgGame = document.getElementById('PgGame');
@@ -160,7 +172,7 @@ var app = {
 
         if(pgGame.classList.contains('flex')){
             this.saveGame();
-        }else if(!pgGame.classList.contains('flex')){
+        }else if(!pgMain.classList.contains('flex')){
             this.actionShowMain();
         }
     },
@@ -171,6 +183,7 @@ var app = {
             iniAdsSettings();
             setupLang();
             application.iniStorageValues();
+            iniRatedValues();
         }, 500);
 
         setTimeout(function () {
@@ -209,6 +222,7 @@ var app = {
     },
 
     actionShowMain: function () {
+        let gamesPlayed = parseInt(storageMng.getValue('gamesPlayed'));
         let pages = document.querySelectorAll('#App > div.flex');
         let PgMain = document.getElementById('PgMain');
 
@@ -218,6 +232,10 @@ var app = {
         this.setAdsSettingRadio();
         this.setLangRadio();
         this.setCardSettingsRatio();
+
+        if(gamesPlayed >= 5){
+            showRateDialogIfNotRated();
+        }
     },
 
     actionShowMainSave: function () {

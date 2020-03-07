@@ -17,10 +17,22 @@
     },
     "cordova-plugin-globalization": {
       "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    },
+    "cordova-plugin-apprate": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-extension": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
+    },
+    "cordova-plugin-nativestorage": {
       "PACKAGE_NAME": "net.hebasoft.pexesowildanimals"
     }
   }

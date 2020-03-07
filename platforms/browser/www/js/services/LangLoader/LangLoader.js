@@ -2,7 +2,7 @@ let allLangs = [
     {
         "lang": "english",
         "langName": "English",
-        "code": "en-gb",
+        "code": "en",
         "translations": {
             "loading": "Loading...",
 
@@ -42,7 +42,7 @@ let allLangs = [
     {
         "lang": "czech",
         "langName": "Čeština",
-        "code": "cs-CZ",
+        "code": "cs",
         "translations": {
             "loading": "Načítám...",
 
@@ -80,8 +80,8 @@ let allLangs = [
         }
     },
     {
-        "lang": "german",
-        "langName": "German",
+        "lang": "deutsch",
+        "langName": "Deutsch",
         "code": "de",
         "translations": {
             "loading": "Wird geladen...",
@@ -120,7 +120,7 @@ let allLangs = [
         }
     },
     {
-        "lang": "france",
+        "lang": "francais",
         "langName": "Français",
         "code": "fr",
         "translations": {
@@ -180,8 +180,8 @@ function loadLangByCode(_code){
 
 function getLangByNavigatorSetup(_callback){
     navigator.globalization.getLocaleName(function (language) {
-        let loadedLang = loadLangByCode(language.value);
-
+        let loadedLang = loadLangByCode(language.value.slice(0,2));
+        console.log(language.value);
         if(typeof(loadedLang[0]) === 'undefined' || typeof(loadedLang[0].translations) === 'undefined'){
             loadedLang = loadLangByName('english');
         }
@@ -233,6 +233,7 @@ function setupLang(){
             doTranslation(loadedLang);
         }else{
             getLangByNavigatorSetup(function (loadedLang) {
+
                 storageMng.setValue('lang', loadedLang.lang);
                 doTranslation(loadedLang);
             });
