@@ -76,6 +76,7 @@ function changeInterstitialAllow(allowed){
 function iniAdsSettings(allowBanner = 'disallow', allowInterstitial = 'allow'){
     storageMng.iniValueFirstTime('allowBanner', allowBanner);
     storageMng.iniValueFirstTime('allowInterstitial', allowInterstitial);
+    storageMng.iniValueFirstTime('adLimiter', 0);
 }
 
 function adsLimiterCheck(){

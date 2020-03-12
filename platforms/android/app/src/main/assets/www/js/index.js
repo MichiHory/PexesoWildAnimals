@@ -105,6 +105,14 @@ var app = {
             'price': 0,
             'name': 'default'
         },
+        'default_green': {
+            'price': 50,
+            'name': 'green'
+        },
+        'default_red': {
+            'price': 50,
+            'name': 'red'
+        },
         'hawk': {
             'price': 200,
             'name': 'hawk'
@@ -193,7 +201,7 @@ var app = {
             application.setLangRadio();
             application.setCardSettingsRatio();
             application.setThemeRadio();
-            prepareBannerAd(true);
+            prepareBannerAd();
         }, 1000);
 
         setTimeout(function () {
@@ -305,7 +313,7 @@ var app = {
             if(element.dataset.option === 'Banner'){
                 changeBannerAllow('allow');
                 changeInterstitialAllow('disallow');
-                prepareBannerAd(true);
+                prepareBannerAd();
             }else if(element.dataset.option === 'Interstitial'){
                 changeBannerAllow('disallow');
                 changeInterstitialAllow('allow');
@@ -642,7 +650,7 @@ var app = {
 
             let gameResultDialog = document.getElementById('GameResultDialog');
             let cards = document.getElementsByClassName('card').length;
-            let stars = 1 + Math.floor((cards) / (application.moves / (application.difficulty * 1.2)));
+            let stars = 1 + Math.floor((cards) / (application.moves / (application.difficulty * 1.45)));
 
             stars = stars > 3 ? 3 : stars;
             let starsElements = document.querySelectorAll("#GameResultDialog .star");
@@ -880,7 +888,7 @@ var app = {
             let interestial = storageMng.getValue('allowInterstitial');
 
             if(interestial === 'allow'){
-                prepareInterstitialAd(true);
+                prepareInterstitialAd();
             }
         }
 

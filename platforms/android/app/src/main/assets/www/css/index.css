@@ -143,7 +143,12 @@ body{
 .card_back{
     background-image: url('../img/gui/cards/card_back.png');
 }
-
+.card_back[data-card="default_green"]{
+    background-image: url("../img/gui/cards/card_back_green.png");
+}
+.card_back[data-card="default_red"]{
+    background-image: url("../img/gui/cards/card_back_red.png");
+}
 .card_back[data-card="hawk"]{
     background-image: url("../img/gui/cards/card_back_hawk.png");
 }
@@ -584,7 +589,13 @@ body{
 }
 
 #PgCardDesign .cardImageContainer .cardImage[data-card="default"]{
-    background-image: url("../img/gui/card_back.png");
+    background-image: url("../img/gui/cards/card_back.png");
+}
+#PgCardDesign .cardImageContainer .cardImage[data-card="default_green"]{
+    background-image: url("../img/gui/cards/card_back_green.png");
+}
+#PgCardDesign .cardImageContainer .cardImage[data-card="default_red"]{
+    background-image: url("../img/gui/cards/card_back_red.png");
 }
 #PgCardDesign .cardImageContainer .cardImage[data-card="hawk"]{
     background-image: url("../img/gui/cards/card_back_hawk.png");
@@ -624,7 +635,7 @@ body{
 }
 
 #PgCardDesign .cardName{
-    width: calc(100% - 175px);
+    width: calc(100% - 75px);
 }
 #PgCardDesign .buyIcon{
     width: 30px;

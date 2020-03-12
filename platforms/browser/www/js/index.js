@@ -105,6 +105,14 @@ var app = {
             'price': 0,
             'name': 'default'
         },
+        'default_green': {
+            'price': 50,
+            'name': 'green'
+        },
+        'default_red': {
+            'price': 50,
+            'name': 'red'
+        },
         'hawk': {
             'price': 200,
             'name': 'hawk'
@@ -122,6 +130,7 @@ var app = {
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
         document.addEventListener('pause', this.onPause.bind(this), false);
+        document.addEventListener('resume', this.onResume.bind(this), false);
         document.addEventListener('backbutton', this.onBackKeyDown.bind(this), false);
     },
 
@@ -153,6 +162,17 @@ var app = {
         }
     },
 
+    onResume: function(){
+        let pgGame = document.getElementById('PgGame');
+
+        setTimeout(function () {
+            if(pgGame.classList.contains('flex')){
+                storageMng.setValue('saved', '0');
+            }
+        }, 500);
+
+    },
+
     onBackKeyDown: function(e){
         e.preventDefault()
         let pgGame = document.getElementById('PgGame');
@@ -171,6 +191,7 @@ var app = {
             iniAdsSettings();
             setupLang();
             application.iniStorageValues();
+            iniRatedValues();
         }, 500);
 
         setTimeout(function () {
@@ -186,11 +207,6 @@ var app = {
         setTimeout(function () {
             let loadScreen = document.getElementById('LoadScreen');
             loadScreen.style.display = 'none';
-            AppRate.preferences.storeAppURL.android = 'market://details?id=com.clovece.hebasoft';
-            AppRate.preferences.simpleMode = true;
-            AppRate.preferences.useLanguage = 'cs';
-
-            AppRate.promptForRating();
         }, 2000);
 
     },
@@ -214,6 +230,7 @@ var app = {
     },
 
     actionShowMain: function () {
+        let gamesPlayed = parseInt(storageMng.getValue('gamesPlayed'));
         let pages = document.querySelectorAll('#App > div.flex');
         let PgMain = document.getElementById('PgMain');
 
@@ -223,6 +240,10 @@ var app = {
         this.setAdsSettingRadio();
         this.setLangRadio();
         this.setCardSettingsRatio();
+
+        if(gamesPlayed >= 5){
+            showRateDialogIfNotRated();
+        }
     },
 
     actionShowMainSave: function () {
@@ -629,7 +650,7 @@ var app = {
 
             let gameResultDialog = document.getElementById('GameResultDialog');
             let cards = document.getElementsByClassName('card').length;
-            let stars = 1 + Math.floor((cards) / (application.moves / (application.difficulty * 1.2)));
+            let stars = 1 + Math.floor((cards) / (application.moves / (application.difficulty * 1.45)));
 
             stars = stars > 3 ? 3 : stars;
             let starsElements = document.querySelectorAll("#GameResultDialog .star");
