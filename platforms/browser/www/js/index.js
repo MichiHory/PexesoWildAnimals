@@ -107,11 +107,11 @@ var app = {
         },
         'default_green': {
             'price': 50,
-            'name': 'green'
+            'name': 'default_green'
         },
         'default_red': {
             'price': 50,
-            'name': 'red'
+            'name': 'default_green'
         },
         'hawk': {
             'price': 200,
@@ -201,7 +201,7 @@ var app = {
             application.setLangRadio();
             application.setCardSettingsRatio();
             application.setThemeRadio();
-            prepareBannerAd(true);
+            prepareBannerAd();
         }, 1000);
 
         setTimeout(function () {
@@ -313,7 +313,7 @@ var app = {
             if(element.dataset.option === 'Banner'){
                 changeBannerAllow('allow');
                 changeInterstitialAllow('disallow');
-                prepareBannerAd(true);
+                prepareBannerAd();
             }else if(element.dataset.option === 'Interstitial'){
                 changeBannerAllow('disallow');
                 changeInterstitialAllow('allow');
@@ -888,7 +888,7 @@ var app = {
             let interestial = storageMng.getValue('allowInterstitial');
 
             if(interestial === 'allow'){
-                prepareInterstitialAd(true);
+                prepareInterstitialAd();
             }
         }
 

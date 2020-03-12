@@ -107,11 +107,11 @@ var app = {
         },
         'default_green': {
             'price': 50,
-            'name': 'green'
+            'name': 'default_green'
         },
         'default_red': {
             'price': 50,
-            'name': 'red'
+            'name': 'default_red'
         },
         'hawk': {
             'price': 200,
