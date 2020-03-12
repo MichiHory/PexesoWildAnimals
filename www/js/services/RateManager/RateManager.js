@@ -10,7 +10,7 @@ function showRateDialog(){
         }
     });
 
-    AppRate.preferences.storeAppURL.android = 'market://details?id=net.hebasoft.pexesowildanimals';
+    AppRate.preferences.storeAppURL.android = 'market://details?id=net.hebasoft.pexesowildanimalspro';
     AppRate.preferences.simpleMode = true;
     AppRate.preferences.useLanguage = langCode;
 

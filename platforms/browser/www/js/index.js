@@ -107,11 +107,11 @@ var app = {
         },
         'default_green': {
             'price': 50,
-            'name': 'green'
+            'name': 'default_green'
         },
         'default_red': {
             'price': 50,
-            'name': 'red'
+            'name': 'default_red'
         },
         'hawk': {
             'price': 200,
@@ -141,10 +141,6 @@ var app = {
     onDeviceReady: function() {
         let application = this;
         this.prepareApplication();
-
-        document.addEventListener('onAdLoaded',function(data){
-            if(data.adType === 'banner') showBanner("bottom");
-        });
 
         let actionElms = document.querySelectorAll('[data-action]');
         actionElms.forEach(function(item){
@@ -188,7 +184,6 @@ var app = {
     prepareApplication: function () {
         let application = this;
         setTimeout(function () {
-            iniAdsSettings();
             setupLang();
             application.iniStorageValues();
             iniRatedValues();
@@ -197,11 +192,9 @@ var app = {
         setTimeout(function () {
             application.drawTheme();
             application.showStars();
-            application.setAdsSettingRadio();
             application.setLangRadio();
             application.setCardSettingsRatio();
             application.setThemeRadio();
-            prepareBannerAd(true);
         }, 1000);
 
         setTimeout(function () {
@@ -237,11 +230,10 @@ var app = {
         this.removeAllCards();
         this.showHidePage(pages, PgMain);
         this.showStars();
-        this.setAdsSettingRadio();
         this.setLangRadio();
         this.setCardSettingsRatio();
 
-        if(gamesPlayed >= 5){
+        if(gamesPlayed >= 20){
             showRateDialogIfNotRated();
         }
     },
@@ -298,29 +290,6 @@ var app = {
 
     actionRepeatGame: function (button) {
         this.prepareGame(this.difficulty);
-    },
-
-    actionSetAdsPreferences: function (element) {
-        let radio = element.querySelector(".radio");
-        if(!radio.classList.contains("selected")){
-            let selectedRadio = document.querySelectorAll('.adOption .radio.selected');
-            selectedRadio.forEach(function (item) {
-                item.classList.remove('selected');
-            });
-
-            radio.classList.add('selected');
-
-            if(element.dataset.option === 'Banner'){
-                changeBannerAllow('allow');
-                changeInterstitialAllow('disallow');
-                prepareBannerAd(true);
-            }else if(element.dataset.option === 'Interstitial'){
-                changeBannerAllow('disallow');
-                changeInterstitialAllow('allow');
-                prepareInterstitialAd();
-                hideBanner();
-            }
-        }
     },
 
     actionSetCard: function (element) {
@@ -428,13 +397,6 @@ var app = {
 
                        flipped[0].classList.add("hidden");
                        flipped[0].classList.remove("flipped");
-                    }
-                    if(restCards.length === 6){
-                        let interestial = storageMng.getValue('allowInterstitial');
-
-                        if(interestial === 'allow'){
-                            prepareInterstitialAd(true);
-                        }
                     }
                    if(restCards.length <= 2){
                        application.finishGame();
@@ -583,7 +545,6 @@ var app = {
         switch (option) {
             case "1": categoryElement = document.getElementById('SettingsCategoryGame'); break;
             case "2": categoryElement = document.getElementById('SettingsCategoryLang'); break;
-            case "3": categoryElement = document.getElementById('SettingsCategoryAds'); break;
         }
         let categories = document.querySelectorAll(".mainActivity > .settings_category:not(.none)");
 
@@ -592,21 +553,6 @@ var app = {
         });
 
         categoryElement.classList.remove('none');
-    },
-
-    setAdsSettingRadio: function () {
-        let banner = storageMng.getValue('allowBanner');
-        let interstitial = storageMng.getValue('allowInterstitial');
-
-        if(banner === "allow"){
-            let radio = document.querySelector('.adOption[data-option="Banner"] .radio');
-            radio.classList.add('selected');
-
-        }else if(interstitial === 'allow'){
-            let radio = document.querySelector('.adOption[data-option="Interstitial"] .radio');
-            radio.classList.add('selected');
-
-        }
     },
 
     setLangRadio: function (){
@@ -669,7 +615,6 @@ var app = {
             storageMng.setValue('saved', '0');
             storageMng.setValue('gamesPlayed', gamesPlayed);
 
-            showInterstitial();
         }, 1000);
     },
 
@@ -882,15 +827,6 @@ var app = {
         }
 
         let flipped = document.querySelectorAll('.card.flipped');
-        let restCards = document.querySelectorAll('.card:not(.hidden)');
-
-        if(restCards.length <= 6){
-            let interestial = storageMng.getValue('allowInterstitial');
-
-            if(interestial === 'allow'){
-                prepareInterstitialAd(true);
-            }
-        }
 
         if(flipped.length === 2){
             if(flipped[0].dataset.img === flipped[1].dataset.img){
