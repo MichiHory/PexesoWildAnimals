@@ -321,7 +321,7 @@ body{
     padding: 0 0 5px 5px;
 }
 
-.radioContainer{
+.radioContainer, .cartContainer{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -680,3 +680,15 @@ body{
     margin-right: 20px;
 }
 
+#RemoveAdsRow{
+    margin-top: 15px;
+}
+
+.cartContainer .buy_icon{
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../img/gui/cart_black.png");
+}

@@ -97,7 +97,22 @@ var app = {
         "wolf_3.png",
         "zebra_1.png",
         "zebra_2.png",
-        "zebra_3.png"
+        "zebra_3.png",
+        "chameleon_1.png",
+        "crockodile_1.png",
+        "eagle_1.png",
+        "frog_1.png",
+        "frog_2.png",
+        "frog_3.png",
+        "kingfisher_1.png",
+        "lizard_1.png",
+        "lizard_2.png",
+        "lizard_3.png",
+        "red_panda_1.png",
+        "turtle_1.png",
+        "turtle_2.png",
+        "turtle_3.png",
+        "wild_pig_1.png"
     ],
 
     cards: {
@@ -111,7 +126,7 @@ var app = {
         },
         'default_red': {
             'price': 50,
-            'name': 'default_green'
+            'name': 'default_red'
         },
         'hawk': {
             'price': 200,
@@ -403,6 +418,10 @@ var app = {
         this.showStyleCategory(option);
     },
 
+    actionShowProVersion: function () {
+        cordova.InAppBrowser.open('https://play.google.com/store/apps/details?id=net.hebasoft.pexesowildanimalspro', '_system');
+    },
+
     actionFlipCard: function(card){
         if(card.classList.contains('hidden')){
             return;
@@ -433,7 +452,7 @@ var app = {
                         let interestial = storageMng.getValue('allowInterstitial');
 
                         if(interestial === 'allow'){
-                            prepareInterstitialAd(true);
+                            prepareInterstitialAd();
                         }
                     }
                    if(restCards.length <= 2){
