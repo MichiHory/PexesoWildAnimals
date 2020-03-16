@@ -433,7 +433,7 @@ var app = {
                         let interestial = storageMng.getValue('allowInterstitial');
 
                         if(interestial === 'allow'){
-                            prepareInterstitialAd(true);
+                            prepareInterstitialAd();
                         }
                     }
                    if(restCards.length <= 2){
