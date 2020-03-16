@@ -418,6 +418,10 @@ var app = {
         this.showStyleCategory(option);
     },
 
+    actionShowProVersion: function () {
+        cordova.InAppBrowser.open('https://play.google.com/store/apps/details?id=net.hebasoft.pexesowildanimalspro', '_system');
+    },
+
     actionFlipCard: function(card){
         if(card.classList.contains('hidden')){
             return;

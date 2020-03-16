@@ -1,11 +1,12 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "Pexeso Animals",
-  "short_name": "Pexeso Animals",
+  "name": "Pairs Animals",
+  "short_name": "Pairs Animals",
   "version": "net.hebasoft.pexesowildanimals",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "Pairs, is a card game which is good for memory training or just for fun",
   "author": "HeBaSoft",
   "icons": [],
+  "orientation": "portrait",
   "start_url": "index.html"
 }
