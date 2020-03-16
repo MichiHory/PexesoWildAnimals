@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="net.hebasoft.pexesowildanimalspro" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Pexeso Animals</name>
+<widget id="net.hebasoft.pexesowildanimalspro" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Pairs Animals Pro</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Pairs, is a card game which is good for memory training or just for fun
     </description>
     <author email="michhory@gmail.com" href="http://hebasoft.net">
         HeBaSoft
@@ -15,4 +15,5 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="Orientation" value="portrait" />
 </widget>
