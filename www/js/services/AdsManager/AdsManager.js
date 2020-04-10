@@ -55,7 +55,7 @@ function showInterstitial(){
 
     if(isInterstitialAllowed === 'allow'){
         AdMob.isInterstitialReady(function(isready){
-            if(adsLimiterCheck() && gamesPlayed > 3 && isready){
+            if(adsLimiterCheck() && gamesPlayed > 1 && isready){
                 AdMob.showInterstitial();
             }
         });

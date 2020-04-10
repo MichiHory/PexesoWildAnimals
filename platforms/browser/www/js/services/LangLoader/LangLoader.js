@@ -28,6 +28,8 @@ let allLangs = [
             "fullscreen": "Fullscreen",
             "banner_info": "A banner will be displayed at the bottom of the screen",
             "full_info": "Fullscreen ad will appear at the end of the game",
+            "remove_ads": "Remove Ads",
+            "remove_ads_info": "Buy version without ads",
 
             "cards": "Cards",
             "approve": "Confirm?",
@@ -68,6 +70,8 @@ let allLangs = [
             "fullscreen": "Fullscreen",
             "banner_info": "Na spodní části obrazovky bude zobrazen banner",
             "full_info": "Na konci hry se zobrazí reklama na celou obrazovku",
+            "remove_ads": "Odstranit reklamy",
+            "remove_ads_info": "Zakoupit verzi bez reklam",
 
             "cards": "Karty",
             "approve": "Potvrdit?",
@@ -108,6 +112,8 @@ let allLangs = [
             "fullscreen": "Ganzer Bildschirm",
             "banner_info": "Am unteren Bildschirmrand wird ein Banner angezeigt",
             "full_info": "Die Vollbildanzeige werbung erscheint am Ende des Spiels",
+            "remove_ads": "Anzeigen entfernen",
+            "remove_ads_info": "Version ohne Werbung kaufen",
 
             "cards": "Karten",
             "approve": "Bestätigen?",
@@ -148,6 +154,8 @@ let allLangs = [
             "fullscreen": "Plein écran",
             "banner_info": "Une bannière s'affiche en bas de l'écran",
             "full_info": "La publicité plein écran apparaît à la fin du jeu",
+            "remove_ads": "Supprimez la pub",
+            "remove_ads_info": "Acheter une version sans publicité",
 
             "cards": "Les cartes",
             "approve": "Confirmer?",
